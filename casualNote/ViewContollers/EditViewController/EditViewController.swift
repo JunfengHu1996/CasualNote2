@@ -53,11 +53,19 @@ class EditViewController: BaseViewController, UIImagePickerControllerDelegate, U
 // MARK: Actions
     @objc func saveNote() {
 //        saveNotesWithSingleNote(note: Note(content: textView.text, timestamp: getTimestamp()))
-        let note = Note(content: textView.text, timestamp: getTimestamp(), id: 0, image: pictureView.image!.pngData()!)
-        insertNote(note: note)
-        NotificationCenter.default.post(name:NSNotification.Name.init("success"), object:nil)
-
-        navigationController?.popViewController(animated: true )
+        let savedImage = pictureView.image
+        if savedImage != nil {
+            let note = Note(content: textView.text, timestamp: getTimestamp(), id: 0, image: pictureView.image!.pngData()!)
+            insertNote(note: note)
+            NotificationCenter.default.post(name:NSNotification.Name.init("success"), object:nil)
+            
+            navigationController?.popViewController(animated: true )
+        } else {
+            let alertController = UIAlertController(title: "可爱你插入一张图片呗💖", message: nil, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            navigationController?.present(alertController, animated: true, completion: nil)
+        }
     }
     
     @objc func popView() {
