@@ -36,7 +36,7 @@ class TableViewCell: UITableViewCell {
         lableView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.backgroundColor = .blue
-        contentView.backgroundColor = .clear
+        contentView.backgroundColor = RGBColor(r: 255, g: 234, b: 167, a: 0.5)
         
         lableView.backgroundColor = RGBColorBase()
         

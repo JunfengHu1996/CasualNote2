@@ -36,30 +36,38 @@ func deleteNote(noteId: Int) {
 }
 
 
-func getAllNotes()->[Note] {
+func getAllNotes(completion: @escaping (_: [Note])->())->[Note] {
     var notes: [Note] = []
     
-    do {
-//        获取数据库（connected to database）
+    DispatchQueue.global().async {
+        do {
+            //        获取数据库（connected to database）
             let database = try Connection(DBPath())
             sqliteDatabase = database
-        
-           let allNotes = try sqliteDatabase.prepare(notesTable)
-        
-//         这里就是 数据转模型，把数据库里的数据存到模型的属性里
-        for note in allNotes.reversed() {
-//            注意这里的singleNote一定要初始化
-            var singleNote = Note(content: "", timestamp: 0, id: 0, image: Data())
-               singleNote.content = note[content]
-               singleNote.timestamp = note[timestamp]
-//            数据库的自增id可用于删除数据时使用
-               singleNote.notesId = note[id]
-               singleNote.image = note[image]
-               notes.append(singleNote)
-           }
-       } catch {
-           print(error)
-       }
+            
+            let allNotes = try sqliteDatabase.prepare(notesTable)
+            
+            //         这里就是 数据转模型，把数据库里的数据存到模型的属性里
+            for note in allNotes {
+                //            注意这里的singleNote一定要初始化
+                var singleNote = Note(content: "", timestamp: 0, id: 0, image: Data())
+                singleNote.content = note[content]
+                singleNote.timestamp = note[timestamp]
+                //            数据库的自增id可用于删除数据时使用
+                singleNote.notesId = note[id]
+                singleNote.image = note[image]
+                notes.append(singleNote)
+                
+            }
+            DispatchQueue.main.async {
+                completion(notes)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    
     return notes
 }
  

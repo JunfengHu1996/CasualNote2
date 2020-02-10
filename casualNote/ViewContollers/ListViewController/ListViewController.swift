@@ -13,7 +13,7 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     var notes:[Note]!
-    var sorted: Bool = false
+    var sorted: Bool = false    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,25 +22,30 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         setTitleLabelWithTitle(title: "随记")
         view.addSubview(tableView!)
         view.bringSubviewToFront(addButton)
-        initNavigation()
+//        initNavigation()
         
-        notes = getAllNotes()
+        
+        notes = getAllNotes(completion: { (notes) in
+            self.notes = notes
+            self.tableView.reloadData()
+        })
         
 //        tableView
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .none
+        tableView.backgroundColor = RGBColor(r: 255, g: 234, b: 167, a: 0.5)
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadNotes), name:NSNotification.Name.init("success"), object: nil)
        
     }
     
 //    initNavigation
-    func initNavigation() -> Void {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "up"), style: .plain, target: self, action: #selector(sort))
-        
-    }
+//    func initNavigation() -> Void {
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "up"), style: .plain, target: self, action: #selector(sort))
+//
+//    }
     
 //    MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +55,10 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let note = notes![indexPath.row]
         let cell: TableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! TableViewCell
+        
         cell.setLabelViewContentWithNote(note: note)
+        
+        
         return cell
     }
     
@@ -82,26 +90,30 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 
     @IBAction func popEditView(_ sender: Any) {
         let editVC = EditViewController()
-        navigationController?.pushViewController(editVC, animated: false)
+        navigationController?.pushViewController(editVC, animated: true)
     }
     
     @objc func loadNotes() -> Void {
-        notes = getAllNotes()
-        tableView.reloadData()
+         notes = getAllNotes(completion: { (notes) in
+                   self.notes = notes
+                self.tableView.reloadData()
+               })
     }
     
-    @objc func sort() -> Void {
-        let reversedNotes = getAllNotes()
-        if sorted {
-            notes = reversedNotes
-            navigationItem.rightBarButtonItem?.image = UIImage(named: "up")
-        } else {
-            notes = reversedNotes.reversed()
-            navigationItem.rightBarButtonItem?.image = UIImage(named: "bottom")
-        }
-        sorted = !sorted
-        tableView.reloadData()
-    }
+//    @objc func sort() -> Void {
+//        let reversedNotes =  notes = getAllNotes(completion: { (notes) in
+//                   self.notes = notes
+//               })
+//        if sorted {
+//            notes = reversedNotes
+//            navigationItem.rightBarButtonItem?.image = UIImage(named: "up")
+//        } else {
+//            notes = reversedNotes.reversed()
+//            navigationItem.rightBarButtonItem?.image = UIImage(named: "bottom")
+//        }
+//        sorted = !sorted
+//        tableView.reloadData()
+//    }
     
 }
 
