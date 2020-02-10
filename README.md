@@ -1,6 +1,7 @@
 # CasualNote2
 **一款Swift编写，数据库用SQlite.swift，支持文字图片的极简app随记**
 
-![写笔记](/Users/grant/Downloads/IMG_7159.PNG)
+![] (https://raw.githubusercontent.com/PeakH/CasualNote2/edit/master/screenshots/write.png)
 
-![展示笔记](/Users/grant/Downloads/IMG_7160.PNG)
+![] (https://raw.githubusercontent.com/PeakH/CasualNote2/edit/master/screenshots/show.png)
+
