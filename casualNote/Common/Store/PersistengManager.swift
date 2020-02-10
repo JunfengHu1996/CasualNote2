@@ -47,7 +47,7 @@ func getAllNotes()->[Note] {
            let allNotes = try sqliteDatabase.prepare(notesTable)
         
 //         这里就是 数据转模型，把数据库里的数据存到模型的属性里
-           for note in allNotes {
+        for note in allNotes.reversed() {
 //            注意这里的singleNote一定要初始化
             var singleNote = Note(content: "", timestamp: 0, id: 0, image: Data())
                singleNote.content = note[content]

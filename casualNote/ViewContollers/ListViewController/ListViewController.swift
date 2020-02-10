@@ -13,6 +13,8 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     var notes:[Note]!
+    var sorted: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,7 +22,8 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         setTitleLabelWithTitle(title: "随记")
         view.addSubview(tableView!)
         view.bringSubviewToFront(addButton)
-//        notes = getNotes()
+        initNavigation()
+        
         notes = getAllNotes()
         
 //        tableView
@@ -30,8 +33,13 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         tableView.separatorStyle = .none
         
         NotificationCenter.default.addObserver(self, selector: #selector(loadNotes), name:NSNotification.Name.init("success"), object: nil)
-        
        
+    }
+    
+//    initNavigation
+    func initNavigation() -> Void {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "up"), style: .plain, target: self, action: #selector(sort))
+        
     }
     
 //    MARK: UITableViewDataSource
@@ -78,8 +86,20 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func loadNotes() -> Void {
-//        notes = getNotes()
         notes = getAllNotes()
+        tableView.reloadData()
+    }
+    
+    @objc func sort() -> Void {
+        let reversedNotes = getAllNotes()
+        if sorted {
+            notes = reversedNotes
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "up")
+        } else {
+            notes = reversedNotes.reversed()
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "bottom")
+        }
+        sorted = !sorted
         tableView.reloadData()
     }
     
