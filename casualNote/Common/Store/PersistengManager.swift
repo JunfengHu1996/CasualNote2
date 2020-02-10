@@ -26,6 +26,7 @@ func insertNote(note: Note) {
 
 
 func deleteNote(noteId: Int) {
+    
     let content = notesTable.filter(id == noteId)
     let deleteSQL = content.delete()
     do {
@@ -35,8 +36,37 @@ func deleteNote(noteId: Int) {
     }
 }
 
+// 主线程获取数据的方法
+func getAllNotes() -> [Note] {
+    var notes: [Note] = []
+    do {
+        //        获取数据库（connected to database）
+        let database = try Connection(DBPath())
+        sqliteDatabase = database
+        
+        let allNotes = try sqliteDatabase.prepare(notesTable)
+        
+        //         这里就是 数据转模型，把数据库里的数据存到模型的属性里
+        for note in allNotes.reversed() {
+            //            注意这里的singleNote一定要初始化
+            var singleNote = Note(content: "", timestamp: 0, id: 0, image: Data())
+            singleNote.content = note[content]
+            singleNote.timestamp = note[timestamp]
+            //            数据库的自增id可用于删除数据时使用
+            singleNote.notesId = note[id]
+            singleNote.image = note[image]
+            notes.append(singleNote)
+            
+        }
 
-func getAllNotes(completion: @escaping (_: [Note])->())->[Note] {
+    } catch {
+        print(error)
+    }
+    return notes
+}
+
+// 子线程异步获取数据
+func getAllNotes(completion: @escaping (_: [Note])->()) {
     var notes: [Note] = []
     
     DispatchQueue.global().async {
@@ -48,7 +78,7 @@ func getAllNotes(completion: @escaping (_: [Note])->())->[Note] {
             let allNotes = try sqliteDatabase.prepare(notesTable)
             
             //         这里就是 数据转模型，把数据库里的数据存到模型的属性里
-            for note in allNotes {
+            for note in allNotes.reversed() {
                 //            注意这里的singleNote一定要初始化
                 var singleNote = Note(content: "", timestamp: 0, id: 0, image: Data())
                 singleNote.content = note[content]
@@ -68,6 +98,5 @@ func getAllNotes(completion: @escaping (_: [Note])->())->[Note] {
     }
     
     
-    return notes
 }
- 
+

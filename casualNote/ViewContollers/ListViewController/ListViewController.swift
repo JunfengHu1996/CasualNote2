@@ -12,8 +12,9 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
-    var notes:[Note]!
-    var sorted: Bool = false    
+    var notes:[Note]! = []
+    var reversedNotes:[Note]! = []
+    var sorted: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +23,10 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         setTitleLabelWithTitle(title: "随记")
         view.addSubview(tableView!)
         view.bringSubviewToFront(addButton)
-//        initNavigation()
+        initNavigation()
         
         
-        notes = getAllNotes(completion: { (notes) in
+        getAllNotes(completion: { (notes) in
             self.notes = notes
             self.tableView.reloadData()
         })
@@ -42,14 +43,14 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
 //    initNavigation
-//    func initNavigation() -> Void {
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "up"), style: .plain, target: self, action: #selector(sort))
-//
-//    }
+    func initNavigation() -> Void {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "up"), style: .plain, target: self, action: #selector(sort))
+
+    }
     
 //    MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.notes!.count 
+        return self.notes!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,7 +72,9 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
 //            sqlite的数据库的id是从1开始自增，为了方便删除不出错误，给note本身也设置了id这个属性和数据库的id对应，这样对应数据才能正确删除
             let note = notes[row]
             deleteNote(noteId: note.notesId)
-            loadNotes()
+//            为了保证数据同步，不能使用异步获取数据，否则会导致数据了UI的cell数目不匹配的问题
+            notes = getAllNotes()
+//            loadNotes()
 //            删除对应行
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
@@ -94,26 +97,27 @@ class ListViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func loadNotes() -> Void {
-         notes = getAllNotes(completion: { (notes) in
+            getAllNotes(completion: { (notes) in
                    self.notes = notes
                 self.tableView.reloadData()
                })
     }
     
-//    @objc func sort() -> Void {
-//        let reversedNotes =  notes = getAllNotes(completion: { (notes) in
-//                   self.notes = notes
-//               })
-//        if sorted {
-//            notes = reversedNotes
-//            navigationItem.rightBarButtonItem?.image = UIImage(named: "up")
-//        } else {
-//            notes = reversedNotes.reversed()
-//            navigationItem.rightBarButtonItem?.image = UIImage(named: "bottom")
-//        }
-//        sorted = !sorted
-//        tableView.reloadData()
-//    }
+    @objc func sort() -> Void {
+        getAllNotes(completion: { (notes) in
+            self.notes = notes
+               })
+        reversedNotes = self.notes
+        if sorted {
+            notes = reversedNotes
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "up")
+        } else {
+            notes = reversedNotes.reversed()
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "bottom")
+        }
+        sorted = !sorted
+        tableView.reloadData()
+    }
     
 }
 

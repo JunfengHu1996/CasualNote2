@@ -26,8 +26,14 @@ class TableViewCell: UITableViewCell {
     }
     
     func setLabelViewContentWithNote(note:Note) -> Void {
-        lableView.text = note.content
-        cardImageView.image = UIImage(data: note.image)
+        DispatchQueue.global().async {
+            let asyncImage = UIImage(data: note.image)
+            DispatchQueue.main.async {
+                self.cardImageView.image = asyncImage
+                self.lableView.text = note.content
+            }
+        }
+        
     }
     
     func initSubviews() -> Void {
@@ -35,7 +41,7 @@ class TableViewCell: UITableViewCell {
         cardImageView.translatesAutoresizingMaskIntoConstraints = false
         lableView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.backgroundColor = .blue
+        containerView.backgroundColor = .white
         contentView.backgroundColor = RGBColor(r: 255, g: 234, b: 167, a: 0.5)
         
         lableView.backgroundColor = RGBColorBase()
