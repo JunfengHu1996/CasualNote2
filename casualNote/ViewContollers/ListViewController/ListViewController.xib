@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewController" customModule="casualNote" customModuleProvider="target">
+            <connections>
+                <outlet property="addButton" destination="53p-Ga-oho" id="eAO-MA-mEz"/>
+                <outlet property="tableView" destination="Cei-PB-L8N" id="E33-Oy-Gqm"/>
+                <outlet property="view" destination="iN0-l3-epB" id="vt5-LW-soO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53p-Ga-oho">
+                    <rect key="frame" x="329" y="777" width="65" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="65" id="KLl-Jk-Yjs"/>
+                        <constraint firstAttribute="height" constant="65" id="Vt8-t0-ecO"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="pen"/>
+                    <connections>
+                        <action selector="popEditView:" destination="-1" eventType="touchUpInside" id="xZr-44-VgU"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cei-PB-L8N">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Cei-PB-L8N" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6pk-iy-QHV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="53p-Ga-oho" secondAttribute="trailing" constant="20" id="7lw-tZ-mgM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Cei-PB-L8N" secondAttribute="bottom" id="GT7-cr-1qg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Cei-PB-L8N" secondAttribute="trailing" id="ajc-HT-Byx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="53p-Ga-oho" secondAttribute="bottom" constant="20" id="dq4-Fy-6Q0"/>
+                <constraint firstItem="Cei-PB-L8N" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="r5R-TY-4bA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="139" y="153"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pen" width="341" height="341"/>
+    </resources>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_casualNote {
+  umbrella header "Pods-casualNote-umbrella.h"
+
+  export *
+  module * { export * }
+}
