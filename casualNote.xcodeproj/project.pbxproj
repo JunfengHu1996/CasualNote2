@@ -21,12 +21,28 @@
 		93AE403423EF922E00C1BB62 /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AE403323EF922E00C1BB62 /* NoteEntity.swift */; };
 		93AE403723EF991300C1BB62 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AE403623EF991300C1BB62 /* Utility.swift */; };
 		93AE403D23EFA45700C1BB62 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AE403B23EFA45700C1BB62 /* TableViewCell.swift */; };
-		B77E148BC8B0A2025AA5F4E9 /* Pods_casualNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26D2E40480472E56850941D /* Pods_casualNote.framework */; };
+		93B9FF5A2407CA8400348D9B /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 93B9FF582407CA8400348D9B /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BCE286F93E92A66A007280C1 /* libPods-casualNote.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EB9CC03FF0D4ABD4610268 /* libPods-casualNote.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		93B9FF5B2407CA8400348D9B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				93B9FF5A2407CA8400348D9B /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		30113FC527CE7747EB6E876D /* Pods-casualNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-casualNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-casualNote/Pods-casualNote.release.xcconfig"; sourceTree = "<group>"; };
 		37ACDA2C5DEA0AC4DD80DF00 /* Pods-casualNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-casualNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-casualNote/Pods-casualNote.debug.xcconfig"; sourceTree = "<group>"; };
+		72EB9CC03FF0D4ABD4610268 /* libPods-casualNote.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-casualNote.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93250C3123EE60FF00E9F672 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		932A7CF623F0297A004DDAA5 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		9340E62E23EE837600F45051 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
@@ -43,7 +59,7 @@
 		93AE403323EF922E00C1BB62 /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
 		93AE403623EF991300C1BB62 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		93AE403B23EFA45700C1BB62 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		F26D2E40480472E56850941D /* Pods_casualNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_casualNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93B9FF582407CA8400348D9B /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../Library/Developer/Xcode/DerivedData/casualNote-aergusvhffxukabyewrbbcazmyra/Build/Products/Debug-iphoneos/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B77E148BC8B0A2025AA5F4E9 /* Pods_casualNote.framework in Frameworks */,
+				BCE286F93E92A66A007280C1 /* libPods-casualNote.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +77,8 @@
 		3DE2F24DD90C3291BDF28536 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F26D2E40480472E56850941D /* Pods_casualNote.framework */,
+				93B9FF582407CA8400348D9B /* SQLite.framework */,
+				72EB9CC03FF0D4ABD4610268 /* libPods-casualNote.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -182,7 +199,7 @@
 				937E218723EE52630007CD08 /* Sources */,
 				937E218823EE52630007CD08 /* Frameworks */,
 				937E218923EE52630007CD08 /* Resources */,
-				BD0E0B7CABC8629E3166A5C9 /* [CP] Embed Pods Frameworks */,
+				93B9FF5B2407CA8400348D9B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -257,24 +274,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD0E0B7CABC8629E3166A5C9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-casualNote/Pods-casualNote-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-casualNote/Pods-casualNote-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

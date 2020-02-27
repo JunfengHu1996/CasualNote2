@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F55657A0EB830133CEEC70FEC25136C6"
+               BlueprintIdentifier = "979ABB27B7BE0613C637DFB39D073462"
                BlueprintName = "Pods-casualNote"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-casualNote.framework">
+               BuildableName = "libPods-casualNote.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

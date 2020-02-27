@@ -26,13 +26,8 @@ class TableViewCell: UITableViewCell {
     }
     
     func setLabelViewContentWithNote(note:Note) -> Void {
-        DispatchQueue.global().async {
-            let asyncImage = UIImage(data: note.image)
-            DispatchQueue.main.async {
-                self.cardImageView.image = asyncImage
-                self.lableView.text = note.content
-            }
-        }
+        self.cardImageView.perform(#selector(setter: UIImageView.image), with:  UIImage(data: note.image), afterDelay: 0, inModes: [.default])
+        self.lableView.perform(#selector(setter: UILabel.text), with: note.content, afterDelay: 0, inModes: [.default])
         
     }
     
